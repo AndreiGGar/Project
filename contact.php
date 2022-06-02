@@ -11,12 +11,12 @@ if (isset($_POST['send'])) {
     $number = mysqli_real_escape_string($conn, $_POST['number']);
     $msg = mysqli_real_escape_string($conn, $_POST['message']);
 
-    $select_message = mysqli_query($conn, "SELECT * FROM `message` WHERE name = '$name' AND email = '$email' AND number = '$number' AND message = '$msg'") or die('query failed');
+    $select_message = mysqli_query($conn, "SELECT * FROM `messages` WHERE name = '$name' AND email = '$email' AND number = '$number' AND description = '$msg'") or die('query failed');
 
-    if (mysqli_num_rows($select_message) > 0) {
+    if(mysqli_num_rows($select_message) > 0){
         $message[] = 'message sent already!';
-    } else {
-        mysqli_query($conn, "INSERT INTO `message`(user_id, name, email, number, message) VALUES('$user_id', '$name', '$email', '$number', '$msg')") or die('query failed');
+    }else{
+        mysqli_query($conn, "INSERT INTO `messages`(name, email, number, description) VALUES('$name', '$email', '$number', '$msg')") or die('query failed');
         $message[] = 'message sent successfully!';
     }
 }

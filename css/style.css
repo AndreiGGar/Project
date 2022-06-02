@@ -383,9 +383,10 @@ section {
 
 .home .content p {
    max-width: 60rem;
-   margin: 1rem auto;
+   margin: 1rem 2rem 2rem;
    line-height: 2;
-   font-size: 1.7rem;
+   font-size: 1.75rem;
+   font-weight: 600;
    color: var(--black);
 }
 
@@ -407,7 +408,7 @@ section {
    padding: 2rem;
    text-align: center;
    position: relative;
-   height: 80vh;
+   height: 90vh;
 }
 
 .products .box-container .box .image {
@@ -622,7 +623,7 @@ section {
 }
 
 .reviews .box-container .box .stars i {
-   color: var(--orange);
+   color: var(--green);
    font-size: 1.7rem;
    margin: 0 .3rem;
 }

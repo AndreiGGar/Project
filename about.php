@@ -4,12 +4,6 @@
 
 session_start();
 
-$user_id = $_SESSION['user_id'];
-
-if (!isset($user_id)) {
-    header('location:login.php');
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -43,13 +37,13 @@ if (!isset($user_id)) {
         <div class="flex">
 
             <div class="image">
-                <img src="images/about-img-1.png" alt="">
+                <img src="images/about-img-1.jpg" alt="">
             </div>
 
             <div class="content">
-                <h3>why choose us?</h3>
+                <h3>¿Por qué elegirnos?</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum odit voluptatum alias sed est in magni nihil nisi deleniti nostrum.</p>
-                <a href="shop.php" class="btn">shop now</a>
+                <a href="shop.php" class="btn">Comprar</a>
             </div>
 
         </div>
@@ -57,9 +51,9 @@ if (!isset($user_id)) {
         <div class="flex">
 
             <div class="content">
-                <h3>what we provide?</h3>
+                <h3>¿Qué te ofrecemos?</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum odit voluptatum alias sed est in magni nihil nisi deleniti nostrum.</p>
-                <a href="contact.php" class="btn">contact us</a>
+                <a href="contact.php" class="btn">Contacto</a>
             </div>
 
             <div class="image">
@@ -75,9 +69,9 @@ if (!isset($user_id)) {
             </div>
 
             <div class="content">
-                <h3>who we are?</h3>
+                <h3>¿Quiénes somos?</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum odit voluptatum alias sed est in magni nihil nisi deleniti nostrum.</p>
-                <a href="#reviews" class="btn">clients reviews</a>
+                <a href="#reviews" class="btn">Review de Clientes</a>
             </div>
 
         </div>
@@ -86,7 +80,7 @@ if (!isset($user_id)) {
 
     <section class="reviews" id="reviews">
 
-        <h1 class="title">client's reviews</h1>
+        <h1 class="title">Las Reviews</h1>
 
         <div class="box-container">
 
@@ -100,7 +94,7 @@ if (!isset($user_id)) {
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
-                <h3>john deo</h3>
+                <h3>John D.</h3>
             </div>
 
             <div class="box">
@@ -113,7 +107,7 @@ if (!isset($user_id)) {
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
-                <h3>john deo</h3>
+                <h3>Marta G.</h3>
             </div>
 
             <div class="box">
@@ -126,7 +120,7 @@ if (!isset($user_id)) {
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
-                <h3>john deo</h3>
+                <h3>Tom A.</h3>
             </div>
 
             <div class="box">
@@ -139,7 +133,7 @@ if (!isset($user_id)) {
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
-                <h3>john deo</h3>
+                <h3>Laura N.</h3>
             </div>
 
             <div class="box">
@@ -152,7 +146,7 @@ if (!isset($user_id)) {
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
-                <h3>john deo</h3>
+                <h3>Marcus O.</h3>
             </div>
 
             <div class="box">
@@ -165,7 +159,7 @@ if (!isset($user_id)) {
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star-half-alt"></i>
                 </div>
-                <h3>john deo</h3>
+                <h3>Shina S.</h3>
             </div>
 
         </div>
