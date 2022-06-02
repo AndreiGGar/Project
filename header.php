@@ -19,13 +19,9 @@
         <nav class="navbar">
             <ul>
                 <li><a href="index.php">Inicio</a></li>
-                <li><a href="#">Submenú +</a>
-                    <ul>
-                        <li><a href="#">Sobre nosotros</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Catálogo</a></li>
+                <li><a href="shop.php">Catálogo</a></li>
+                <li><a href="about.php">Sobre nosotros</a></li>
+                <li><a href="contact.php">Contacto</a></li>
                 <li><a href="#">Cuenta +</a>
                     <ul>
                         <li><a href="login.php">Iniciar sesión</a></li>
