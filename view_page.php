@@ -13,14 +13,21 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles</title>
+    <title>Detalle Producto</title>
+    <!-- bootstrap link  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 
-    <!-- font awesome cdn link  -->
+    <!-- font awesome link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- custom admin css file link  -->
-    <link rel="stylesheet" href="css/style.css">
+    <!-- sweetalert link  -->
+    <script src="js/sweetalert2.all.min.js"></script>
 
+    <!-- jquery link  -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+    <!-- css link  -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -29,7 +36,7 @@ session_start();
 
     <section class="quick-view">
 
-        <h1 class="title">detalle producto</h1>
+        <h1 class="title">Detalle producto</h1>
 
         <?php
         if (isset($_GET['pid'])) {
@@ -48,8 +55,12 @@ session_start();
                         <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
                         <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
                         <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
-                        <input type="submit" value="add to wishlist" name="add_to_wishlist" class="option-btn">
-                        <input type="submit" value="add to cart" name="add_to_cart" class="btn">
+                        <div class="row d-flex justify-content-center">
+                            <input type="submit" value="add to wishlist" name="add_to_wishlist" class="option-btn">
+                        </div>
+                        <div class="row d-flex justify-content-center">
+                            <input type="submit" value="add to cart" name="add_to_cart" class="btn">
+                        </div>
                     </form>
         <?php
                 }
@@ -60,7 +71,7 @@ session_start();
         ?>
 
         <div class="more-btn">
-            <a href="index.php" class="option-btn">ir a inicio</a>
+            <button onclick="history.go(-1)" class="another-btn">Volver atrás</button>
         </div>
 
     </section>

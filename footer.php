@@ -5,9 +5,9 @@
         <div class="box">
             <h3>links rápidos</h3>
             <a href="index.php">Inicio</a>
-            <a href="#">Catálogo</a>
-            <a href="#">Sobre nosotros</a>
-            <a href="#">Contacto</a>
+            <a href="shop.php">Catálogo</a>
+            <a href="about.php">Sobre nosotros</a>
+            <a href="contact.php">Contacto</a>
         </div>
 
         <div class="box">

@@ -11,4 +11,12 @@
 
     $conn->set_charset('utf8');
 
+    $base_url = "http://localhost/Project/";
+    $my_email = "andrei@phoenixcomps.es";
+
+    $smtp['host'] = "smtp.hostinger.com";
+    $smtp['user'] = "andrei@phoenixcomps.es";
+    $smtp['pass'] = "Aa12345678!";
+    $smtp['port'] = 465;
+
 ?>

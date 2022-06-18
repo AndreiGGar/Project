@@ -13,9 +13,9 @@ if (isset($_POST['send'])) {
 
     $select_message = mysqli_query($conn, "SELECT * FROM `messages` WHERE name = '$name' AND email = '$email' AND number = '$number' AND description = '$msg'") or die('query failed');
 
-    if(mysqli_num_rows($select_message) > 0){
+    if (mysqli_num_rows($select_message) > 0) {
         $message[] = 'message sent already!';
-    }else{
+    } else {
         mysqli_query($conn, "INSERT INTO `messages`(name, email, number, description) VALUES('$name', '$email', '$number', '$msg')") or die('query failed');
         $message[] = 'message sent successfully!';
     }
@@ -30,14 +30,21 @@ if (isset($_POST['send'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contact</title>
+    <title>Contacto</title>
+    <!-- bootstrap link  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 
-    <!-- font awesome cdn link  -->
+    <!-- font awesome link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- custom admin css file link  -->
-    <link rel="stylesheet" href="css/style.css">
+    <!-- sweetalert link  -->
+    <script src="js/sweetalert2.all.min.js"></script>
 
+    <!-- jquery link  -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+    <!-- css link  -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -53,10 +60,10 @@ if (isset($_POST['send'])) {
 
         <form action="" method="POST">
             <h3>¡Envíanos un mensaje!</h3>
-            <input type="text" name="name" placeholder="enter your name" class="box" required>
-            <input type="email" name="email" placeholder="enter your email" class="box" required>
-            <input type="number" name="number" placeholder="enter your number" class="box" required>
-            <textarea name="message" class="box" placeholder="enter your message" required cols="30" rows="10"></textarea>
+            <input type="text" name="name" placeholder="Introduce tu nombre" class="box" required>
+            <input type="email" name="email" placeholder="Introduce tu email" class="box" required>
+            <input type="number" name="number" placeholder="Introduce tu número de teléfono" class="box" required>
+            <textarea name="message" class="box" placeholder="Introduce el mensaje" required cols="30" rows="10"></textarea>
             <input type="submit" value="send message" name="send" class="btn">
         </form>
 

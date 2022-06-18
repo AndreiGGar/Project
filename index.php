@@ -40,7 +40,19 @@ if (isset($_POST['add_to_wishlist'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="src/logo.ico" />
     <title>PhoenixComps</title>
+    <!-- bootstrap link  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+
+    <!-- font awesome link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- sweetalert link  -->
+    <script src="js/sweetalert2.all.min.js"></script>
+
+    <!-- jquery link  -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+    <!-- css link  -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -67,18 +79,18 @@ if (isset($_POST['add_to_wishlist'])) {
             <?php
             $select_products = mysqli_query($conn, "SELECT * FROM `products` LIMIT 3") or die('query failed');
             if (mysqli_num_rows($select_products) > 0) {
-                while ($fetch_products = mysqli_fetch_assoc($select_products)) {
+                while ($row = mysqli_fetch_assoc($select_products)) {
             ?>
                     <form action="" method="POST" class="box">
-                        <a href="view_page.php?pid=<?php echo $fetch_products['id']; ?>" class="fas fa-eye"></a>
-                        <div class="price"><?php echo $fetch_products['price']; ?>€</div>
-                        <img src="<?php echo $fetch_products['image']; ?>" alt="" class="image">
-                        <div class="name"><?php echo $fetch_products['name']; ?></div>
+                        <a href="view_page.php?pid=<?php echo $row['id']; ?>" class="fas fa-eye"></a>
+                        <div class="price"><?php echo number_format($row["price"], 2, ',', '.'); ?>€</div>
+                        <img src="<?php echo $row['image']; ?>" alt="" class="image">
+                        <div class="name"><?php echo $row['name']; ?></div>
                         <input type="number" name="product_quantity" value="1" min="0" class="qty">
-                        <input type="hidden" name="product_id" value="<?php echo $fetch_products['id']; ?>">
-                        <input type="hidden" name="product_name" value="<?php echo $fetch_products['description']; ?>">
-                        <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
-                        <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
+                        <input type="hidden" name="product_id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" name="product_name" value="<?php echo $row['description']; ?>">
+                        <input type="hidden" name="product_price" value="<?php echo $row['price']; ?>">
+                        <input type="hidden" name="product_image" value="<?php echo $row['image']; ?>">
                         <input type="submit" value="Añadir a Deseados" name="add_to_wishlist" class="option-btn">
                         <input type="submit" value="Añadir al Carrito" name="add_to_cart" class="btn">
                     </form>
@@ -92,7 +104,7 @@ if (isset($_POST['add_to_wishlist'])) {
         </div>
 
         <div class="more-btn">
-            <a href="#" class="option-btn">Cargar más</a>
+            <a href="shop.php" class="another-btn">Cargar más</a>
         </div>
 
     </section>
@@ -101,8 +113,8 @@ if (isset($_POST['add_to_wishlist'])) {
 
         <div class="content">
             <h3>¿Tienes preguntas?</h3>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio officia aliquam quis saepe? Quia, libero.</p>
-            <a href="#" class="btn">Contacto</a>
+            <p>Si te has quedado con dudas puedes contactar a nuestro gran equipo hasta quedar satisfecho sin ningún compromiso.</p>
+            <a href="contact.php" class="btn">Contacto</a>
         </div>
 
     </section>

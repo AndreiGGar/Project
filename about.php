@@ -14,13 +14,20 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nosotros</title>
+    <!-- bootstrap link  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
 
-    <!-- font awesome cdn link  -->
+    <!-- font awesome link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- custom admin css file link  -->
-    <link rel="stylesheet" href="css/style.css">
+    <!-- sweetalert link  -->
+    <script src="js/sweetalert2.all.min.js"></script>
 
+    <!-- jquery link  -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+
+    <!-- css link  -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>

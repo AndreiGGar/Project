@@ -5,6 +5,7 @@
    --red: #c0392b;
    --orange: #f39c12;
    --green: #77bf2e;
+   --dark-green: #53a501;
    --black: #202020;
    --white: #fff;
    --light-color: #666;
@@ -30,7 +31,7 @@
 }
 
 *::selection {
-   background-color: var(--green);
+   background-color: var(--dark-green);
    color: var(--white);
 }
 
@@ -61,33 +62,98 @@ section {
    padding: 3rem 2rem;
 }
 
-.message {
-   position: sticky;
-   top: 0;
-   margin: 0 auto;
-   max-width: 1200px;
-   background-color: var(--light-bg);
-   display: flex;
-   align-items: center;
-   padding: 2rem;
-   gap: 1.5rem;
-   z-index: 10000;
-   justify-content: space-between;
+.input-field {
+   max-width: 100%;
+   width: 100%;
+   background-color: #f0f0f0;
+   margin: 20px 0;
+   height: 55px;
+   border-radius: .3rem;
+   display: grid;
+   grid-template-columns: 15% 85%;
+   padding: 0 0.4rem;
+   position: relative;
 }
 
-.message span {
-   color: var(--black);
-   font-size: 2rem;
+.input-field i {
+   text-align: center;
+   line-height: 55px;
+   color: #acacac;
+   transition: 0.5s;
+   font-size: 1.5rem;
 }
 
-.message i {
-   font-size: 2.5rem;
-   color: var(--red);
-   cursor: pointer;
+.input-field input {
+   background: none;
+   outline: none;
+   border: none;
+   line-height: 1;
+   font-weight: 600;
+   font-size: 1.5rem;
+   color: #333;
 }
 
-.message i:hover {
-   transform: rotate(90deg);
+.input-field input::placeholder {
+   color: #aaa;
+   font-weight: 500;
+}
+
+.login, .register, .forgot, .reset {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+.login .form, .register .form, .forgot .form, .reset .form {
+   background: #fff;
+   padding: 30px 35px;
+   border-radius: 5px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login .form form .form-control, .register .form form .form-control, .forgot .form form .form-control, .reset .form form .form-control {
+   height: 40px;
+   font-size: 15px;
+   display: inline-block;
+}
+
+.login .form form .forget-pass {
+   margin: 0px 0 10px 0;
+}
+
+.login .form form .forget-pass a {
+   font-size: 15px;
+}
+
+.login .form form .button, .register .form form .button, .forgot .form form .button, .reset .form form .button {
+   background: var(--green);
+   color: #fff;
+   font-size: 17px;
+   font-weight: 500;
+   transition: all 0.3s ease;
+   width: 100%;
+}
+
+.login .form form .button:hover, .register .form form .button:hover, .forgot .form form .button:hover, .reset .form form .button:hover {
+   background: var(--dark-green);
+}
+
+.login .form form .link, .register .form form .link, .forgot .form form .link, .reset .form form .link {
+   margin-top: 10px;
+   padding: 5px 0;
+}
+
+.login .form form .link a, .register .form form .link a, .forgot .form form .link a, .reset .form form .link {
+   color: var(--green);
+}
+
+.login .login-form form p, .register .register-form form p, .forgot .forgot-form form p, .reset .forgot-form form p {
+   font-size: 14px;
+}
+
+.login .row .alert, .register .row .alert, .forgot .row .alert, .reset .forgot-form form p {
+   font-size: 14px;
 }
 
 .disabled {
@@ -97,7 +163,7 @@ section {
 }
 
 .btn,
-.delete-btn,
+.another-btn,
 .option-btn {
    display: inline-block;
    border-radius: .5rem;
@@ -113,7 +179,7 @@ section {
    background-color: var(--green);
 }
 
-.delete-btn {
+.another-btn {
    background-color: var(--red);
 }
 
@@ -122,9 +188,11 @@ section {
 }
 
 .btn:hover,
-.delete-btn:hover,
+.another-btn:hover,
 .option-btn:hover {
    background-color: var(--black);
+   color: var(--white);
+   text-decoration: none;
 }
 
 .empty {
@@ -150,10 +218,11 @@ section {
    align-items: center;
    justify-content: center;
    gap: 1rem;
-   background-color: var(--black);
    text-align: center;
    min-height: 50vh;
-   background: url(../images/gaming-pc.jpg) no-repeat center;
+   background: url(../images/gaming-pc.jpg) no-repeat;
+   background-size: cover;
+   background-position: center;
 }
 
 .heading h3 {
@@ -177,7 +246,7 @@ section {
 
 .title {
    text-align: center;
-   margin-bottom: 2rem;
+   margin-bottom: 1rem;
    color: var(--black);
    text-transform: uppercase;
    font-size: 4rem;
@@ -262,11 +331,17 @@ section {
    color: var(--light-bg);
    align-items: center;
    display: flex;
+   text-decoration: none;
 }
 
-.header .flex .logo p {
-   font-size: 2.25rem;
+.logo p {
+   font-size: 2rem;
    margin-left: 0.5em;
+   margin-top: 0.5em;
+}
+
+.header .flex .navbar {
+   display: inline-block;
 }
 
 .header .flex .navbar ul {
@@ -289,6 +364,7 @@ section {
 .header .flex .navbar ul li a:hover {
    background-color: var(--green);
    color: var(--white);
+   text-decoration: none;
 }
 
 .header .flex .navbar ul li ul {
@@ -306,10 +382,11 @@ section {
 
 .header .flex .navbar ul li:hover ul {
    display: inline-block;
+   text-decoration: none;
 }
 
 .header .flex .icons>* {
-   font-size: 2.5rem;
+   font-size: 2rem;
    margin-left: 1rem;
    color: var(--light-bg);
    cursor: pointer;
@@ -317,6 +394,7 @@ section {
 
 .header .flex .icons>*:hover {
    color: var(--green);
+   text-decoration: none;
 }
 
 .header .flex .icons span {
@@ -357,7 +435,7 @@ section {
    color: var(--green);
 }
 
-.header .flex .account-box .delete-btn {
+.header .flex .account-box .another-btn {
    margin-top: .5rem;
 }
 
@@ -394,7 +472,7 @@ section {
    max-width: 1200px;
    margin: 0 auto;
    display: grid;
-   grid-template-columns: repeat(auto-fit, 33rem);
+   grid-template-columns: repeat(auto-fit, 35rem);
    gap: 1.5rem;
    align-items: flex-start;
    justify-content: center;
@@ -408,7 +486,6 @@ section {
    padding: 2rem;
    text-align: center;
    position: relative;
-   height: 90vh;
 }
 
 .products .box-container .box .image {
@@ -445,12 +522,17 @@ section {
 .products .box-container .box .fa-eye:hover {
    background-color: var(--black);
    color: var(--white);
+   text-decoration: none;
 }
 
 .products .box-container .box .name {
    margin: 1rem;
    font-size: 2rem;
    color: var(--black);
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2;
+   overflow: hidden;
 }
 
 .products .box-container .box .qty {
@@ -715,7 +797,7 @@ section {
    margin-right: 3px;
 }
 
-.footer .box-container #info p a{
+.footer .box-container #info p a {
    padding: 0rem 0rem;
    display: inline-block;
 }
@@ -748,7 +830,7 @@ section {
 
 }
 
-@media (max-width:768px) {
+@media (max-width:1050px) {
 
    #menu-btn {
       display: inline-block;
@@ -760,9 +842,6 @@ section {
 
    .header .flex .navbar {
       position: absolute;
-      top: 99%;
-      left: 0;
-      right: 0;
       background-color: var(--black);
       border-top: var(--border);
       border-bottom: var(--border);
@@ -771,6 +850,7 @@ section {
 
    .header .flex .navbar.active {
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      margin-top: 41.5rem;
    }
 
    .header .flex .navbar ul li {
