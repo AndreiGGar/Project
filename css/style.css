@@ -125,8 +125,8 @@ section {
    justify-content: center;
    gap: 1rem;
    text-align: center;
-   min-height: 50vh;
-   background: url(../images/gaming-pc.jpg) no-repeat;
+   min-height: 60vh;
+   background: url(../images/setup.png) no-repeat;
    background-size: cover;
    background-position: center;
 }
@@ -373,6 +373,7 @@ section {
    background-color: var(--dark-blue);
    z-index: 1000;
    box-shadow: var(--box-shadow);
+   border-bottom: 1px solid var(--white);
 }
 
 .header .flex {
@@ -883,6 +884,10 @@ section {
    font-size: 2rem;
    color: var(--black);
    margin-top: 1rem;
+}
+
+.contact {
+   padding: 8rem 8rem;
 }
 
 .contact form {

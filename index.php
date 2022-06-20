@@ -64,6 +64,21 @@ if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
     }
 }
 
+if (isset($_POST['send'])) {
+    $newletter = $_POST['newletter'];
+
+    $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `newsletter` WHERE email = '$newletter'") or die('query failed');
+
+    if (mysqli_num_rows($check_cart_numbers) > 0) {
+        $_SESSION['status'] = "La cuenta ya ha sido establecido.";
+        $_SESSION['status_msg'] = "error";
+    } else {
+        mysqli_query($conn, "INSERT INTO `newsletter`(email) VALUES('$newletter')") or die('query failed');
+        $_SESSION['status'] = "La cuenta se ha establecido correctamente.";
+        $_SESSION['status_msg'] = "success";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -158,9 +173,9 @@ if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
 
         <div class="content">
             <h3>Newsletter</h3>
-            <p>Suscríbete ya a nuestro newsletter y no te pierdas ninguna novedad. Además recibirás numerosos descuentos, sorteos... ¿a qué esperas?</p>
-            <form>
-                <input type="text" name="newletter"></input>
+            <p>Suscríbete ya a nuestro newsletter con tu cuenta de correo y no te pierdas ninguna novedad. Además recibirás numerosos descuentos, sorteos... ¿a qué esperas?</p>
+            <form action="" method="POST" class="box">
+                <input type="email" name="newletter" require></input>
                 <button type="submit" class="btn-news" name="send">Enviar</button>
             </form>
         </div>
