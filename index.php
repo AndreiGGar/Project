@@ -4,30 +4,65 @@
 
 session_start();
 
-/*
-$user_id = $_SESSION['user_id'];
-
-if(!isset($user_id)){
-   header('location:login.php');
+if (isset($_SESSION["user_id"])) {
+    $user_id = $_SESSION['user_id'];
+}
+if (isset($_COOKIE["user_id"])) {
+    $user_id = $_COOKIE['user_id'];
 }
 
-if (isset($_POST['add_to_wishlist'])) {
+if (isset($_POST['add_to_wishlist']) && !isset($_COOKIE['admin'])) {
+
+    if (!isset($user_id)) {
+        header('location:login.php');
+    };
 
     $product_id = $_POST['product_id'];
-    $product_name = $_POST['product_name'];
-    $product_price = $_POST['product_price'];
-    $product_image = $_POST['product_image'];
 
-    $check_wishlist_numbers = mysqli_query($conn, "SELECT * FROM `wishlist` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
+    $check_wishlist_numbers = mysqli_query($conn, "SELECT * FROM `wishlist` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
+
+    $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
 
     if (mysqli_num_rows($check_wishlist_numbers) > 0) {
-        $message[] = 'Ya fue añadido a la lista de productos deseados';
+        $_SESSION['status'] = "Producto ya añadido a la lista de deseados.";
+        $_SESSION['status_msg'] = "error";
+    } elseif (mysqli_num_rows($check_cart_numbers) > 0) {
+        $_SESSION['status'] = "Producto ya añadido al carrito.";
+        $_SESSION['status_msg'] = "error";
     } else {
-        mysqli_query($conn, "INSERT INTO `wishlist`(user_id, pid, name, price, image) VALUES('$user_id', '$product_id', '$product_name', '$product_price', '$product_image')") or die('query failed');
-        $message[] = 'Producto añadido a la lista de productos deseados';
+        mysqli_query($conn, "INSERT INTO `wishlist`(user_id, product_id) VALUES('$user_id', '$product_id')") or die('query failed');
+        $_SESSION['status'] = "Producto añadido a la lista de deseados.";
+        $_SESSION['status_msg'] = "success";
     }
 }
-*/
+
+if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
+
+    if (!isset($user_id)) {
+        header('location:login.php');
+    };
+
+    $product_id = $_POST['product_id'];
+    $product_quantity = $_POST['product_quantity'];
+
+    $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
+
+    if (mysqli_num_rows($check_cart_numbers) > 0) {
+        $_SESSION['status'] = "Producto ya añadido al carrito de compras.";
+        $_SESSION['status_msg'] = "error";
+    } else {
+
+        $check_wishlist_numbers = mysqli_query($conn, "SELECT * FROM `wishlist` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
+
+        if (mysqli_num_rows($check_wishlist_numbers) > 0) {
+            mysqli_query($conn, "DELETE FROM `wishlist` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
+        }
+
+        mysqli_query($conn, "INSERT INTO `cart`(user_id, product_id, quantity) VALUES('$user_id', '$product_id', '$product_quantity')") or die('query failed');
+        $_SESSION['status'] = "Producto añadido al carrito de compras.";
+        $_SESSION['status_msg'] = "success";
+    }
+}
 
 ?>
 
@@ -38,7 +73,7 @@ if (isset($_POST['add_to_wishlist'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="src/logo.ico" />
+    <link rel="shortcut icon" href="src/logo.ico">
     <title>PhoenixComps</title>
     <!-- bootstrap link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
@@ -63,8 +98,8 @@ if (isset($_POST['add_to_wishlist'])) {
     <section class="home">
 
         <div class="content">
-            <h3>Promociones</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime reiciendis, modi placeat sit cumque molestiae.</p>
+            <h1 class="title">Promociones</h1>
+            <p>Si buscas las mejores ofertas tecnológicas, sin duda, esta es tu página. Buscamos ofrecerte siempre los mejores productos al mejor precio, calidad garantizada.</p>
             <a href="shop.php" class="btn">Descubre más</a>
         </div>
 
@@ -82,7 +117,7 @@ if (isset($_POST['add_to_wishlist'])) {
                 while ($row = mysqli_fetch_assoc($select_products)) {
             ?>
                     <form action="" method="POST" class="box">
-                        <a href="view_page.php?pid=<?php echo $row['id']; ?>" class="fas fa-eye"></a>
+                        <a href="view_page.php?id=<?php echo $row['id']; ?>" class="fas fa-eye"></a>
                         <div class="price"><?php echo number_format($row["price"], 2, ',', '.'); ?>€</div>
                         <img src="<?php echo $row['image']; ?>" alt="" class="image">
                         <div class="name"><?php echo $row['name']; ?></div>
@@ -97,7 +132,7 @@ if (isset($_POST['add_to_wishlist'])) {
             <?php
                 }
             } else {
-                echo '<p class="empty">no products added yet!</p>';
+                echo '<p class="empty">¡No hay productos aún!</p>';
             }
             ?>
 
@@ -119,10 +154,40 @@ if (isset($_POST['add_to_wishlist'])) {
 
     </section>
 
+    <section class="newsletter">
+
+        <div class="content">
+            <h3>Newsletter</h3>
+            <p>Suscríbete ya a nuestro newsletter y no te pierdas ninguna novedad. Además recibirás numerosos descuentos, sorteos... ¿a qué esperas?</p>
+            <form>
+                <input type="text" name="newletter"></input>
+                <button type="submit" class="btn-news" name="send">Enviar</button>
+            </form>
+        </div>
+
+    </section>
+
+    <div class="wrapper">
+        <img src="src/cookie.png" alt="">
+        <div class="content">
+            <header>Consentimiento Cookies</header>
+            <p>Esta página usa cookies para otorgar la mejor experiencia a cada usuario.</p>
+            <div class="buttons">
+                <button class="item">Aceptar</button>
+                <a href="#" class="item">Ver más acerca</a>
+            </div>
+        </div>
+    </div>
+
     <?php @include 'footer.php'; ?>
 
     <script src="js/script.js"></script>
+    <script src="js/cookie.js"></script>
 
 </body>
 
 </html>
+
+<?php
+@include 'scripts/sweetalert.php';
+?>

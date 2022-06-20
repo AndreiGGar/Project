@@ -4,6 +4,66 @@
 
 session_start();
 
+if (isset($_SESSION["user_id"])) {
+    $user_id = $_SESSION['user_id'];
+}
+if (isset($_COOKIE["user_id"])) {
+    $user_id = $_COOKIE['user_id'];
+}
+
+if (isset($_POST['add_to_wishlist']) && !isset($_COOKIE['admin'])) {
+
+    if (!isset($user_id)) {
+        header('location:login.php');
+    };
+
+    $product_id = $_POST['product_id'];
+
+    $check_wishlist_numbers = mysqli_query($conn, "SELECT * FROM `wishlist` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
+
+    $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
+
+    if (mysqli_num_rows($check_wishlist_numbers) > 0) {
+        $_SESSION['status'] = "Producto ya añadido a la lista de deseados.";
+        $_SESSION['status_msg'] = "error";
+    } elseif (mysqli_num_rows($check_cart_numbers) > 0) {
+        $_SESSION['status'] = "Producto ya añadido al carrito.";
+        $_SESSION['status_msg'] = "error";
+    } else {
+        mysqli_query($conn, "INSERT INTO `wishlist`(user_id, product_id) VALUES('$user_id', '$product_id')") or die('query failed');
+        $_SESSION['status'] = "Producto añadido a la lista de deseados.";
+        $_SESSION['status_msg'] = "success";
+    }
+}
+
+if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
+
+    if (!isset($user_id)) {
+        header('location:login.php');
+    };
+
+    $product_id = $_POST['product_id'];
+    $product_quantity = $_POST['product_quantity'];
+
+    $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
+
+    if (mysqli_num_rows($check_cart_numbers) > 0) {
+        $_SESSION['status'] = "Producto ya añadido al carrito de compras.";
+        $_SESSION['status_msg'] = "error";
+    } else {
+
+        $check_wishlist_numbers = mysqli_query($conn, "SELECT * FROM `wishlist` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
+
+        if (mysqli_num_rows($check_wishlist_numbers) > 0) {
+            mysqli_query($conn, "DELETE FROM `wishlist` WHERE product_id = '$product_id' AND user_id = '$user_id'") or die('query failed');
+        }
+
+        mysqli_query($conn, "INSERT INTO `cart`(user_id, product_id, quantity) VALUES('$user_id', '$product_id', '$product_quantity')") or die('query failed');
+        $_SESSION['status'] = "Producto añadido al carrito de compras.";
+        $_SESSION['status_msg'] = "success";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +73,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="src/logo.ico">
     <title>Catálogo</title>
     <!-- bootstrap link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
@@ -25,9 +86,7 @@ session_start();
 
     <!-- jquery link  -->
     <script src="js/jquery-3.6.0.min.js"></script>
-
     <script src="js/jquery-ui.js"></script>
-
     <link rel="stylesheet" href="css/jquery-ui.css">
 
     <!-- css link  -->
@@ -47,19 +106,19 @@ session_start();
 
         <div class="row">
 
-            <div class="col-3">
+            <div class="col-sm-3">
 
-                <h1>Filtro</h1>
+                <h1 class="title text-left">Filtro</h1>
                 <div class="list-group">
                     <h3>Precio</h3>
-                    <input type="hidden" id="hidden_minimum_price" value="0" />
-                    <input type="hidden" id="hidden_maximum_price" value="10000" />
-                    <p id="price_show">0 - 5000</p>
+                    <input type="hidden" id="hidden_minimum_price" value="0">
+                    <input type="hidden" id="hidden_maximum_price" value="10000">
+                    <p id="price_show">0€ - 5000€</p>
                     <div id="price_range"></div>
                 </div>
                 <div class="list-group">
                     <h3>Marca</h3>
-                    <div style="height: 30vh; overflow-y: auto; overflow-x: hidden;">
+                    <div class="brand">
                         <?php
 
                         $query = "SELECT DISTINCT name FROM brands";
@@ -77,7 +136,7 @@ session_start();
                 </div>
                 <div class="list-group">
                     <h3>Categoría</h3>
-                    <div style="height: 30vh; overflow-y: auto; overflow-x: hidden;">
+                    <div class="category">
                         <?php
 
                         $query = "SELECT DISTINCT name FROM categories";
@@ -96,7 +155,7 @@ session_start();
             </div>
 
 
-            <div class="col-9">
+            <div class="col-sm-9">
 
                 <h1 class="title">Productos</h1>
 
@@ -186,7 +245,7 @@ session_start();
                 values: [0, 5000],
                 step: 100,
                 stop: function(event, ui) {
-                    $('#price_show').html(ui.values[0] + ' - ' + ui.values[1]);
+                    $('#price_show').html(ui.values[0] + '€ - ' + ui.values[1] + '€');
                     $('#hidden_minimum_price').val(ui.values[0]);
                     $('#hidden_maximum_price').val(ui.values[1]);
                     filter_data();
@@ -199,3 +258,7 @@ session_start();
 </body>
 
 </html>
+
+<?php
+@include 'scripts/sweetalert.php';
+?>

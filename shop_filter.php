@@ -6,8 +6,13 @@ include('config.php');
 
 if (isset($_POST["action"])) {
 	$query = "
-	SELECT *, a.name as name, b.name as brandname, c.name as categoryname FROM `products` as A INNER JOIN `brands` as b INNER JOIN `categories` as c WHERE a.brand = b.id AND a.category = c.id AND a.status = 1
+	SELECT *, a.id as id, a.name as name, b.name as brandname, c.name as categoryname FROM `products` as A INNER JOIN `brands` as b INNER JOIN `categories` as c WHERE a.brand = b.id AND a.category = c.id AND a.status = 1
 	";
+	if (isset($_POST["maximum_price"]) && !empty($_POST["maximum_price"])) {
+		$query .= "
+			AND a.price BETWEEN '0' AND '" . $_POST["maximum_price"] . "'
+		";
+	}
 	if (isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"])) {
 		$query .= "
 			AND a.price BETWEEN '" . $_POST["minimum_price"] . "' AND '" . $_POST["maximum_price"] . "'
@@ -32,8 +37,8 @@ if (isset($_POST["action"])) {
 			$output .= '
 
 				<form action="" method="POST" class="box">
-					<a href="view_page.php?pid=' . $row['id'] . '" class="fas fa-eye"></a>
-					<div class="price">' . $row['price'] . '€</div>
+					<a href="view_page.php?id=' . $row['id'] . '" class="fas fa-eye"></a>
+					<div class="price">' . number_format($row["price"], 2, ',', '.') . '€</div>
 					<img src="' . $row['image'] . '" alt="" class="image">
 					<div class="name">' . $row['name'] . '</div>
 					<input type="number" name="product_quantity" value="1" min="0" class="qty">
@@ -48,7 +53,7 @@ if (isset($_POST["action"])) {
 			';
 		}
 	} else {
-		$output = '<h3>No hay productos con las especificaciones marcadas</h3>';
+		$output = '<h2 class="secondary" id="secondary_text">No se encuentran productos con las especificaciones indicadas</h2>';
 	}
 	echo $output;
 }

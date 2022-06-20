@@ -11,32 +11,6 @@ require 'vendor/autoload.php';
 
 session_start();
 
-// if (isset($_POST['submit'])) {
-
-//    $filter_name = filter_var($_POST['name']);
-//    $name = mysqli_real_escape_string($conn, $filter_name);
-//    $filter_email = filter_var($_POST['email']);
-//    $email = mysqli_real_escape_string($conn, $filter_email);
-//    $filter_pass = filter_var($_POST['pass']);
-//    $pass = mysqli_real_escape_string($conn, md5($filter_pass));
-//    $filter_cpass = filter_var($_POST['cpass']);
-//    $cpass = mysqli_real_escape_string($conn, md5($filter_cpass));
-
-//    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email'") or die('query failed');
-
-//    if (mysqli_num_rows($select_users) > 0) {
-//       $message[] = 'El usuario ya existe.';
-//    } else {
-//       if ($pass != $cpass) {
-//          $message[] = 'Las contraseñas no coinciden.';
-//       } else {
-//          mysqli_query($conn, "INSERT INTO `users`(name, email, password) VALUES('$name', '$email', '$pass')") or die('query failed');
-//          $message[] = '¡Te has registrado con éxito!';
-//          header('location: login.php');
-//       }
-//    }
-// }
-
 if (isset($_POST["signup"])) {
    $full_name = mysqli_real_escape_string($conn, $_POST["signup_full_name"]);
    $email = mysqli_real_escape_string($conn, $_POST["signup_email"]);
@@ -103,9 +77,10 @@ if (isset($_POST["signup"])) {
             $mail->addEmbeddedImage('src/logo-small.png', 'logo', 'PhoenixComps');
 
             $mail->send();
-            header("Location: login.php");
             $_SESSION['status'] = "Hemos enviado un link de confirmación a tu correo: " . $email . ".";
             $_SESSION['status_msg'] = "success";
+            header("Location: login.php");
+            exit;
          } catch (Exception $e) {
             $_SESSION['status'] = "Correo no enviado. Inténtelo de nuevo.";
             $_SESSION['status_msg'] = "error";
@@ -126,6 +101,7 @@ if (isset($_POST["signup"])) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="shortcut icon" href="src/logo.ico">
    <title>Registro</title>
    <!-- bootstrap link  -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
@@ -177,6 +153,8 @@ if (isset($_POST["signup"])) {
          </div>
       </div>
    </div>
+
+   <script src="js/script.js"></script>
 
 </body>
 

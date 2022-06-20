@@ -34,6 +34,7 @@ if (isset($_POST["resetPassword"])) {
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="src/logo.ico">
   <title>Restablecimiento Contraseña</title>
   <!-- bootstrap link  -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
@@ -52,6 +53,7 @@ if (isset($_POST["resetPassword"])) {
 </head>
 
 <body>
+
   <div class="container reset">
     <div class="row">
       <div class="col-md-6 offset-md-3 form reset-form">
@@ -71,8 +73,7 @@ if (isset($_POST["resetPassword"])) {
     </div>
   </div>
 
-  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-  <script src="app.js"></script>
+  <script src="js/script.js"></script>
 
 </body>
 

@@ -14,10 +14,12 @@ if (isset($_POST['send'])) {
     $select_message = mysqli_query($conn, "SELECT * FROM `messages` WHERE name = '$name' AND email = '$email' AND number = '$number' AND description = '$msg'") or die('query failed');
 
     if (mysqli_num_rows($select_message) > 0) {
-        $message[] = 'message sent already!';
+        $_SESSION['status'] = "Mensaje ya enviado.";
+        $_SESSION['status_msg'] = "error";
     } else {
         mysqli_query($conn, "INSERT INTO `messages`(name, email, number, description) VALUES('$name', '$email', '$number', '$msg')") or die('query failed');
-        $message[] = 'message sent successfully!';
+        $_SESSION['status'] = "Mensaje enviado correctamente.";
+        $_SESSION['status_msg'] = "success";
     }
 }
 
@@ -30,6 +32,7 @@ if (isset($_POST['send'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="src/logo.ico">
     <title>Contacto</title>
     <!-- bootstrap link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
@@ -76,3 +79,7 @@ if (isset($_POST['send'])) {
 </body>
 
 </html>
+
+<?php
+@include 'scripts/sweetalert.php';
+?>
