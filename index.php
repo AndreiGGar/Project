@@ -14,7 +14,7 @@ if (isset($_COOKIE["user_id"])) {
 if (isset($_POST['add_to_wishlist']) && !isset($_COOKIE['admin'])) {
 
     if (!isset($user_id)) {
-        header('location:login.php');
+        header('location:login');
     };
 
     $product_id = $_POST['product_id'];
@@ -39,7 +39,7 @@ if (isset($_POST['add_to_wishlist']) && !isset($_COOKIE['admin'])) {
 if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
 
     if (!isset($user_id)) {
-        header('location:login.php');
+        header('location:login');
     };
 
     $product_id = $_POST['product_id'];
@@ -115,7 +115,7 @@ if (isset($_POST['send'])) {
         <div class="content">
             <h1 class="title">Promociones</h1>
             <p>Si buscas las mejores ofertas tecnológicas, sin duda, esta es tu página. Buscamos ofrecerte siempre los mejores productos al mejor precio, calidad garantizada.</p>
-            <a href="shop.php" class="btn">Descubre más</a>
+            <a href="shop" class="btn">Descubre más</a>
         </div>
 
     </section>
@@ -132,7 +132,7 @@ if (isset($_POST['send'])) {
                 while ($row = mysqli_fetch_assoc($select_products)) {
             ?>
                     <form action="" method="POST" class="box">
-                        <a href="view_page.php?id=<?php echo $row['id']; ?>" class="fas fa-eye"></a>
+                        <a href="view_page?id=<?php echo $row['id']; ?>" class="fas fa-eye"></a>
                         <div class="price"><?php echo number_format($row["price"], 2, ',', '.'); ?>€</div>
                         <img src="<?php echo $row['image']; ?>" alt="" class="image">
                         <div class="name"><?php echo $row['name']; ?></div>
@@ -154,7 +154,7 @@ if (isset($_POST['send'])) {
         </div>
 
         <div class="more-btn">
-            <a href="shop.php" class="another-btn">Cargar más</a>
+            <a href="shop" class="another-btn">Cargar más</a>
         </div>
 
     </section>
@@ -164,7 +164,7 @@ if (isset($_POST['send'])) {
         <div class="content">
             <h3>¿Tienes preguntas?</h3>
             <p>Si te has quedado con dudas puedes contactar a nuestro gran equipo hasta quedar satisfecho sin ningún compromiso.</p>
-            <a href="contact.php" class="btn">Contacto</a>
+            <a href="contact" class="btn">Contacto</a>
         </div>
 
     </section>

@@ -12,7 +12,7 @@ if (isset($_COOKIE["user_id"])) {
 }
 
 if (!isset($user_id)) {
-    header('location:login.php');
+    header('location:login');
 };
 
 if (isset($_POST['order'])) {
@@ -81,7 +81,7 @@ $user = $row['email'];
 
     <section class="heading">
         <h3>Pedido</h3>
-        <p> <a href="home.php">Inicio</a> / Pedido </p>
+        <p> <a href="home">Inicio</a> / Pedido </p>
     </section>
 
     <section class="display-order">

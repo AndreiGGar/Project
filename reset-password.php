@@ -7,7 +7,7 @@ error_reporting(0);
 session_start();
 
 if (isset($_SESSION["user_id"])) {
-  header("Location: index.php");
+  header("Location: index");
 }
 
 if (isset($_POST["resetPassword"])) {
@@ -18,7 +18,7 @@ if (isset($_POST["resetPassword"])) {
     mysqli_query($conn, $sql);
     $_SESSION['status'] = "La contraseña se restableció correctamente.";
     $_SESSION['status_msg'] = "error";
-    header("Location: index.php");
+    header("Location: index");
   } else {
     $_SESSION['status'] = "Las contraseñas no coinciden.";
     $_SESSION['status_msg'] = "error";

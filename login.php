@@ -12,14 +12,14 @@ require 'vendor/autoload.php';
 session_start();
 
 if (isset($_SESSION["user_id"])) {
-   header('location: orders.php');
+   header('location: orders');
 }
 if (isset($_COOKIE["user_id"])) {
-   header('location: orders.php');
+   header('location: orders');
 }
 
 if (isset($_COOKIE["admin"])) {
-   header('location: admin/index.php');
+   header('location: admin/index');
 }
 
 if (isset($_POST["signin"])) {
@@ -34,11 +34,11 @@ if (isset($_POST["signin"])) {
          $row = mysqli_fetch_assoc($check_email);
          $username = $row['id'];
 			setcookie('user_id',$username,time()+60*60*24*7);
-         header("Location: index.php");
+         header("Location: index");
 		} else{
          $row = mysqli_fetch_assoc($check_email);
          $_SESSION["user_id"] = $row['id'];
-         header("Location: index.php");
+         header("Location: index");
 		}
    } else if (mysqli_num_rows($check_verification) > 0) {
       $_SESSION['status'] = "Debes autentificar tu cuenta.";
@@ -56,7 +56,7 @@ if (isset($_POST["signin"])) {
       $row = mysqli_fetch_assoc($check_admin);
       $admin = $row['id'];
       setcookie('admin',$admin,time()+60*60*24*30);
-      header("Location: admin/index.php");
+      header("Location: admin/index");
    }
 }
 
@@ -107,11 +107,11 @@ if (isset($_POST["signin"])) {
                   <input class="checkbox" type="checkbox" value="Recordarme" name="remember">
                   <p>Mantener Sesión</p>
                </div>
-               <div class="link forget-pass text-left"><a href="forgot-password.php">¿Contraseña olvidada?</a></div>
+               <div class="link forget-pass text-left"><a href="forgot-password">¿Contraseña olvidada?</a></div>
                <div class="form-group">
                   <input class="form-control button" type="submit" value="Inicio sesión" name="signin">
                </div>
-               <div class="link login-link text-center"><p>¿Aún no eres miembro? <a href="register.php">Regístrate aquí</a></p></div>
+               <div class="link login-link text-center"><p>¿Aún no eres miembro? <a href="register">Regístrate aquí</a></p></div>
             </form>
          </div>
       </div>

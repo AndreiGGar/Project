@@ -37,7 +37,7 @@ if (isset($_POST["action"])) {
 			$output .= '
 
 				<form action="" method="POST" class="box">
-					<a href="view_page.php?id=' . $row['id'] . '" class="fas fa-eye"></a>
+					<a href="view_page?id=' . $row['id'] . '" class="fas fa-eye"></a>
 					<div class="price">' . number_format($row["price"], 2, ',', '.') . '€</div>
 					<img src="' . $row['image'] . '" alt="" class="image">
 					<div class="name">' . $row['name'] . '</div>

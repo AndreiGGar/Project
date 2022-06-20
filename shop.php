@@ -14,7 +14,7 @@ if (isset($_COOKIE["user_id"])) {
 if (isset($_POST['add_to_wishlist']) && !isset($_COOKIE['admin'])) {
 
     if (!isset($user_id)) {
-        header('location:login.php');
+        header('location:login');
     };
 
     $product_id = $_POST['product_id'];
@@ -39,7 +39,7 @@ if (isset($_POST['add_to_wishlist']) && !isset($_COOKIE['admin'])) {
 if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
 
     if (!isset($user_id)) {
-        header('location:login.php');
+        header('location:login');
     };
 
     $product_id = $_POST['product_id'];
@@ -99,7 +99,7 @@ if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
 
     <section class="heading">
         <h3>nuestra tienda</h3>
-        <p> <a href="index.php">Inicio</a> / Catálogo </p>
+        <p> <a href="index">Inicio</a> / Catálogo </p>
     </section>
 
     <section class="products">
@@ -167,7 +167,7 @@ if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
                                 while ($fetch_products = mysqli_fetch_assoc($select_products)) {
                             ?>
                             <form action="" method="POST" class="box">
-                                <a href="view_page.php?pid=<?php echo $fetch_products['id']; ?>" class="fas fa-eye"></a>
+                                <a href="view_page?pid=<?php echo $fetch_products['id']; ?>" class="fas fa-eye"></a>
                                 <div class="price"><?php echo $fetch_products['price']; ?>€</div>
                                 <img src="<?php echo $fetch_products['image']; ?>" alt="" class="image">
                                 <div class="name"><?php echo $fetch_products['name']; ?></div>
@@ -211,7 +211,7 @@ if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
                 var brand = get_filter('brand');
                 var category = get_filter('category');
                 $.ajax({
-                    url: "shop_filter.php",
+                    url: "shop_filter",
                     method: "POST",
                     data: {
                         action: action,

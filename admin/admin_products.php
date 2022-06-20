@@ -9,7 +9,7 @@ if (isset($_COOKIE["admin"])) {
 }
 
 if (!isset($admin)) {
-   header('location: ../login.php');
+   header('location: ../login');
 };
 
 if (isset($_POST['add_product'])) {
@@ -57,7 +57,7 @@ if (isset($_GET['delete'])) {
    mysqli_query($conn, "DELETE FROM `products` WHERE id = '$delete_id'") or die('query failed');
    mysqli_query($conn, "DELETE FROM `wishlist` WHERE id = '$delete_id'") or die('query failed');
    mysqli_query($conn, "DELETE FROM `cart` WHERE id = '$delete_id'") or die('query failed');
-   header('location:admin_products.php');
+   header('location:admin_products');
 }
 
 ?>
@@ -96,7 +96,7 @@ if (isset($_GET['delete'])) {
       <form action="" method="POST" enctype="multipart/form-data">
          <h3 class="title">Añadir nuevo producto</h3>
          <input type="text" class="box" placeholder="Nombre" name="name" required>
-         <input type="number" min="0" class="box" placeholder="Precio" name="price" required>
+         <input type="number" min="0" class="box" placeholder="Precio" name="price" step="any" required>
          <select name="get_brand" class="box">
             <?php
             $select_brands = mysqli_query($conn, "SELECT * FROM `brands`") or die('query failed');
@@ -146,8 +146,8 @@ if (isset($_GET['delete'])) {
                   <img class="image" src="../<?php echo $fetch_products['image']; ?>" alt="">
                   <div class="name"><?php echo $fetch_products['name']; ?></div>
                   <div class="description"><?php echo $fetch_products['description']; ?></div>
-                  <a href="admin_update_product.php?update=<?php echo $fetch_products['id']; ?>" class="option-btn">Actualizar</a>
-                  <a href="admin_products.php?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('¿Borrar este producto?');">Borrar</a>
+                  <a href="admin_update_product?update=<?php echo $fetch_products['id']; ?>" class="option-btn">Actualizar</a>
+                  <a href="admin_products?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('¿Borrar este producto?');">Borrar</a>
                </div>
          <?php
             }

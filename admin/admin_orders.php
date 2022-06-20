@@ -11,7 +11,7 @@ if (isset($_COOKIE["admin"])) {
 }
 
 if (!isset($admin)) {
-   header('location: ../login.php');
+   header('location: ../login');
 };
 
 if (isset($_POST['update_order'])) {
@@ -25,7 +25,7 @@ if (isset($_POST['update_order'])) {
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
    mysqli_query($conn, "DELETE FROM `orders` WHERE id = '$delete_id'") or die('query failed');
-   header('location:admin_orders.php');
+   header('location:admin_orders');
 }
 
 ?>
@@ -93,7 +93,7 @@ if (isset($_GET['delete'])) {
                         <option value="cancelado" <?php echo $disabled; ?>>cancelado</option>
                      </select>
                      <input type="submit" name="update_order" value="update" class="option-btn">
-                     <a href="admin_orders.php?delete=<?php echo $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('¿Borrar este pedido?');">Borrar</a>
+                     <a href="admin_orders?delete=<?php echo $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('¿Borrar este pedido?');">Borrar</a>
                   </form>
                </div>
          <?php

@@ -4,10 +4,10 @@
 
         <div class="box">
             <h3>links rápidos</h3>
-            <a href="index.php">Inicio</a>
-            <a href="shop.php">Catálogo</a>
-            <a href="about.php">Sobre nosotros</a>
-            <a href="contact.php">Contacto</a>
+            <a href="index">Inicio</a>
+            <a href="shop">Catálogo</a>
+            <a href="about">Sobre nosotros</a>
+            <a href="contact">Contacto</a>
         </div>
 
         <div class="box">

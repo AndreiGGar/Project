@@ -9,13 +9,13 @@ if (isset($_COOKIE["admin"])) {
 }
 
 if (!isset($admin)) {
-   header('location: ../login.php');
+   header('location: ../login');
 };
 
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
    mysqli_query($conn, "DELETE FROM `users` WHERE id = '$delete_id'") or die('query failed');
-   header('location:admin_users.php');
+   header('location:admin_users');
 }
 
 ?>
@@ -69,7 +69,7 @@ if (isset($_GET['delete'])) {
                                                          if ($fetch_users['user_type'] == '2') {
                                                             echo 'var(--blue)';
                                                          }; ?>"><?php echo $fetch_users['user_type']; ?></span></p>
-                  <a href="admin_users.php?delete=<?php echo $fetch_users['id']; ?>" onclick="return confirm('¿Borrar este usuario?');" class="delete-btn">Borrar</a>
+                  <a href="admin_users?delete=<?php echo $fetch_users['id']; ?>" onclick="return confirm('¿Borrar este usuario?');" class="delete-btn">Borrar</a>
                </div>
          <?php
             }

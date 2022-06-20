@@ -12,7 +12,7 @@ if (isset($_COOKIE["user_id"])) {
 }
 
 if(!isset($user_id)){
-   header('location:login.php');
+   header('location:login');
 }
 
 $user_query = mysqli_query($conn, "SELECT email FROM `users` WHERE id = $user_id") or die('query failed');
@@ -51,7 +51,7 @@ $user = $row['email'];
 
 <section class="heading">
     <h3>Pedidos</h3>
-    <p> <a href="home.php">Inicio</a> / pedido </p>
+    <p> <a href="home">Inicio</a> / pedido </p>
 </section>
 
 <section class="placed-orders">
@@ -66,7 +66,7 @@ $user = $row['email'];
             while($fetch_orders = mysqli_fetch_assoc($select_orders)){
     ?>
     <div class="box">
-        <form action="generate_pdf.php" method="post" target="_blank">
+        <form action="generate_pdf" method="post" target="_blank">
         <p> Fecha pedido: <span><?php echo $fetch_orders['app_date']; ?></span> </p>
         <p> Email: <span><?php echo $user ?></span> </p>
         <p> Dirección: <span><?php echo $fetch_orders['place']; ?></span> </p>

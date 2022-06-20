@@ -9,7 +9,7 @@ if (isset($_COOKIE["admin"])) {
 }
 
 if (!isset($admin)) {
-   header('location: ../login.php');
+   header('location: ../login');
 };
 
 if (isset($_POST['add_brand'])) {
@@ -31,7 +31,7 @@ if (isset($_POST['add_brand'])) {
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
    $select_delete_brand = mysqli_query($conn, "DELETE FROM `brands` WHERE id = '$delete_id'") or die('query failed');
-   header('location: admin_brands.php');
+   header('location: admin_brands');
 }
 
 ?>
@@ -87,7 +87,7 @@ if (isset($_GET['delete'])) {
                <div class="box">
                   <div class="name">Id: <?php echo $fetch_products['id']; ?></div>
                   <div class="name">Nombre: <?php echo $fetch_products['name']; ?></div>
-                  <a href="admin_brands.php?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('¿Borrar esta marca?');">delete</a>
+                  <a href="admin_brands?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('¿Borrar esta marca?');">delete</a>
                </div>
          <?php
             }

@@ -16,7 +16,7 @@ session_start();
 error_reporting(0);
 
 if (isset($_SESSION["user_id"])) {
-  header("Location: index.php");
+  header("Location: index");
 }
 
 if (isset($_POST["resetPassword"])) {
@@ -38,7 +38,7 @@ if (isset($_POST["resetPassword"])) {
       <body>
       <p><strong>Estimado {$data['full_name']},</strong></p>
       <p>¿Te has olvidado de la contraseña? No hay ningún problema. Haz click al siguiente enlace para restablecer tu contraseña.</p>
-      <p><a href='{$base_url}reset-password.php?token={$data['token']}'>Reset Password</a></p>
+      <p><a href='{$base_url}reset-password?token={$data['token']}'>Reset Password</a></p>
       <img src='cid:logo';
       </body>
       </html>

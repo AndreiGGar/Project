@@ -12,13 +12,13 @@ if (isset($_COOKIE["user_id"])) {
 }
 
 if (!isset($user_id)) {
-    header('location:login.php');
+    header('location:login');
 };
 
 if (isset($_POST['add_to_cart'])) {
 
     if (!isset($user_id)) {
-        header('location:login.php');
+        header('location:login');
     };
 
     $product_id = $_POST['product_id'];
@@ -46,12 +46,12 @@ if (isset($_POST['add_to_cart'])) {
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
     mysqli_query($conn, "DELETE FROM `wishlist` WHERE id = '$delete_id'") or die('query failed');
-    header('location: wishlist.php');
+    header('location: wishlist');
 }
 
 if (isset($_GET['delete_all'])) {
     mysqli_query($conn, "DELETE FROM `wishlist` WHERE user_id = '$user_id'") or die('query failed');
-    header('location: wishlist.php');
+    header('location: wishlist');
 }
 
 ?>
@@ -86,7 +86,7 @@ if (isset($_GET['delete_all'])) {
 
     <section class="heading">
         <h3>Lista de productos deseados</h3>
-        <p> <a href="index.php">Inicio</a> / Productos Deseados </p>
+        <p> <a href="index">Inicio</a> / Productos Deseados </p>
     </section>
 
     <section class="wishlist">
@@ -102,8 +102,8 @@ if (isset($_GET['delete_all'])) {
                 while ($fetch_wishlist = mysqli_fetch_assoc($select_wishlist)) {
             ?>
                     <form action="" method="POST" class="box">
-                        <a href="wishlist.php?delete=<?php echo $fetch_wishlist['id']; ?>" class="fas fa-times" onclick="return confirm('¿Borrar de la lista de deseados?');"></a>
-                        <a href="view_page.php?id=<?php echo $fetch_wishlist['id']; ?>" class="fas fa-eye"></a>
+                        <a href="wishlist?delete=<?php echo $fetch_wishlist['id']; ?>" class="fas fa-times" onclick="return confirm('¿Borrar de la lista de deseados?');"></a>
+                        <a href="view_page?id=<?php echo $fetch_wishlist['id']; ?>" class="fas fa-eye"></a>
                         <img src="<?php echo $fetch_wishlist['image']; ?>" alt="" class="image">
                         <div class="name"><?php echo $fetch_wishlist['name']; ?></div>
                         <div class="price"><?php echo number_format($fetch_wishlist["price"], 2, ',', '.'); ?>€</div>
@@ -123,8 +123,8 @@ if (isset($_GET['delete_all'])) {
         </div>
 
         <div class="wishlist-total">
-            <a href="shop.php" class="option-btn">Seguir Comprando</a>
-            <a href="wishlist.php?delete_all" class="another-btn <?php echo ($grand_total > 1) ? '' : 'disabled' ?>" onclick="return confirm('¿Quitar todos los productos de la lista?');">Borrar toda la lista</a>
+            <a href="shop" class="option-btn">Seguir Comprando</a>
+            <a href="wishlist?delete_all" class="another-btn <?php echo ($grand_total > 1) ? '' : 'disabled' ?>" onclick="return confirm('¿Quitar todos los productos de la lista?');">Borrar toda la lista</a>
         </div>
 
     </section>

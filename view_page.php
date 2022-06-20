@@ -14,7 +14,7 @@ if (isset($_COOKIE["user_id"])) {
 if (isset($_POST['add_to_wishlist']) && !isset($_COOKIE['admin'])) {
 
     if (!isset($user_id)) {
-        header('location:login.php');
+        header('location:login');
     };
 
     $product_id = $_POST['product_id'];
@@ -39,7 +39,7 @@ if (isset($_POST['add_to_wishlist']) && !isset($_COOKIE['admin'])) {
 if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
 
     if (!isset($user_id)) {
-        header('location:login.php');
+        header('location:login');
     };
 
     $product_id = $_POST['product_id'];

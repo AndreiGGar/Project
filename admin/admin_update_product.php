@@ -9,7 +9,7 @@ if (isset($_COOKIE["admin"])) {
 }
 
 if (!isset($admin)) {
-   header('location: ../login.php');
+   header('location: ../login');
 };
 
 if (isset($_POST['update_product'])) {
@@ -124,7 +124,7 @@ if (isset($_POST['update_product'])) {
                <input type="number" step="any" min="0" class="box" value="<?php echo $fetch_products['price']; ?>" required placeholder="Precio" name="price">
                <textarea name="description" class="box" required placeholder="Descripción" cols="30" rows="10"><?php echo $fetch_products['description']; ?></textarea>
                <input type="file" accept="image/jpg, image/jpeg, image/png" class="box" name="image">
-               <a href="admin_products.php" class="option-btn">Volver</a>
+               <a href="admin_products" class="option-btn">Volver</a>
                <input type="submit" value="Actualizar producto" name="update_product" class="btn">
             </form>
 

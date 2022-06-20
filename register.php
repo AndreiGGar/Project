@@ -6,7 +6,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
 require 'vendor/autoload.php';
 
 session_start();
@@ -27,7 +26,7 @@ if (isset($_POST["signup"])) {
       $_SESSION['status'] = "El email ya está registrado.";
       $_SESSION['status_msg'] = "error";
    } else {
-      $sql = "INSERT INTO users (`name`, `email`, `password`, `token`, `user-type`, `status`, `date-add`) VALUES ('$full_name', '$email', '$password', '$token', '2', '0', now())";
+      $sql = "INSERT INTO users (`name`, `email`, `password`, `token`, `user_type`, `status`, `date-add`) VALUES ('$full_name', '$email', '$password', '$token', '2', '0', now())";
       $result = mysqli_query($conn, $sql);
       if ($result) {
          $_POST["signup_full_name"] = "";
@@ -46,7 +45,7 @@ if (isset($_POST["signup"])) {
             <p><strong>Estimado {$full_name},</strong></p>
             <p>¡Gracias por registrarte!</p>
             <P>Solo te queda un sencillo paso. Haz click al siguiente enlace para verificar tu cuenta.</p>
-            <p><a href='{$base_url}verify-email.php?token={$token}'>Verificar Cuenta</a></p>
+            <p><a href='{$base_url}verify-email?token={$token}'>Verificar Cuenta</a></p>
             <img src='cid:logo';
             </body>
             </html>
@@ -79,7 +78,7 @@ if (isset($_POST["signup"])) {
             $mail->send();
             $_SESSION['status'] = "Hemos enviado un link de confirmación a tu correo: " . $email . ".";
             $_SESSION['status_msg'] = "success";
-            header("Location: login.php");
+            header("Location: login");
             exit;
          } catch (Exception $e) {
             $_SESSION['status'] = "Correo no enviado. Inténtelo de nuevo.";
@@ -147,7 +146,7 @@ if (isset($_POST["signup"])) {
                   <input class="form-control button" type="submit" value="Registro" name="signup">
                </div>
                <div class="link login-link text-center">
-                  <p>Ya eres miembro? <a href="login.php">Inicia sesión aquí</a></p>
+                  <p>Ya eres miembro? <a href="login">Inicia sesión aquí</a></p>
                </div>
             </form>
          </div>

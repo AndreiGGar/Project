@@ -9,7 +9,7 @@ if (isset($_COOKIE["admin"])) {
 }
 
 if (!isset($admin)) {
-   header('location: ../login.php');
+   header('location: ../login');
 };
 
 if (isset($_POST['add_category'])) {
@@ -31,7 +31,7 @@ if (isset($_POST['add_category'])) {
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
    $select_delete_category = mysqli_query($conn, "DELETE FROM `categories` WHERE id = '$delete_id'") or die('query failed');
-   header('location: admin_categories.php');
+   header('location: admin_categories');
 }
 
 ?>
@@ -87,7 +87,7 @@ if (isset($_GET['delete'])) {
                <div class="box">
                   <div class="name">Id: <?php echo $fetch_products['id']; ?></div>
                   <div class="name">Nombre: <?php echo $fetch_products['name']; ?></div>
-                  <a href="admin_categories.php?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('¿Borrar esta categoría?');">delete</a>
+                  <a href="admin_categories?delete=<?php echo $fetch_products['id']; ?>" class="delete-btn" onclick="return confirm('¿Borrar esta categoría?');">delete</a>
                </div>
          <?php
             }

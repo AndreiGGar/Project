@@ -37,7 +37,7 @@ session_start();
 
     <section class="heading">
         <h3>sobre nosotros</h3>
-        <p> <a href="index.php">Inicio</a> / Sobre Nosotros </p>
+        <p> <a href="index">Inicio</a> / Sobre Nosotros </p>
     </section>
 
     <section class="about">
@@ -51,7 +51,7 @@ session_start();
             <div class="content">
                 <h3>¿Por qué elegirnos?</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum odit voluptatum alias sed est in magni nihil nisi deleniti nostrum.</p>
-                <a href="shop.php" class="btn">Comprar</a>
+                <a href="shop" class="btn">Comprar</a>
             </div>
 
         </div>
@@ -61,7 +61,7 @@ session_start();
             <div class="content">
                 <h3>¿Qué te ofrecemos?</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum odit voluptatum alias sed est in magni nihil nisi deleniti nostrum.</p>
-                <a href="contact.php" class="btn">Contacto</a>
+                <a href="contact" class="btn">Contacto</a>
             </div>
 
             <div class="image">

@@ -12,18 +12,18 @@ if (isset($_COOKIE["user_id"])) {
 }
 
 if (!isset($user_id)) {
-    header('location:login.php');
+    header('location:login');
 };
 
 if (isset($_GET['delete'])) {
     $delete_id = $_GET['delete'];
     mysqli_query($conn, "DELETE FROM `cart` WHERE id = '$delete_id'") or die('query failed');
-    header('location:cart.php');
+    header('location:cart');
 }
 
 if (isset($_GET['delete_all'])) {
     mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
-    header('location:cart.php');
+    header('location:cart');
 };
 
 if (isset($_POST['update_quantity'])) {
@@ -67,7 +67,7 @@ if (isset($_POST['update_quantity'])) {
 
     <section class="heading">
         <h3>Carrito de compras</h3>
-        <p> <a href="index.php">Inicio</a> / Carrito </p>
+        <p> <a href="index">Inicio</a> / Carrito </p>
     </section>
 
     <section class="shopping-cart">
@@ -83,8 +83,8 @@ if (isset($_POST['update_quantity'])) {
                 while ($fetch_cart = mysqli_fetch_assoc($select_cart)) {
             ?>
                     <div class="box">
-                        <a href="cart.php?delete=<?php echo $fetch_cart['id']; ?>" class="fas fa-times" onclick="return confirm('delete this from cart?');"></a>
-                        <a href="view_page.php?id=<?php echo $fetch_cart['id']; ?>" class="fas fa-eye"></a>
+                        <a href="cart?delete=<?php echo $fetch_cart['id']; ?>" class="fas fa-times" onclick="return confirm('delete this from cart?');"></a>
+                        <a href="view_page?id=<?php echo $fetch_cart['id']; ?>" class="fas fa-eye"></a>
                         <img src="<?php echo $fetch_cart['image']; ?>" alt="" class="image">
                         <div class="name"><?php echo $fetch_cart['name']; ?></div>
                         <div class="price"><?php echo number_format($fetch_cart["price"], 2, ',', '.'); ?>€</div>
@@ -107,14 +107,14 @@ if (isset($_POST['update_quantity'])) {
         </div>
 
         <div class="more-btn">
-            <a href="cart.php?delete_all" class="another-btn <?php echo ($total > 1) ? '' : 'disabled' ?>" onclick="return confirm('delete all from cart?');">delete all</a>
+            <a href="cart?delete_all" class="another-btn <?php echo ($total > 1) ? '' : 'disabled' ?>" onclick="return confirm('¿Borrar del carrito?');">delete all</a>
         </div>
 
         <div class="cart-total">
             <p>Total: <span><?php $total = number_format($total, 2, ',', '.');
                             echo $total ?>€</span></p>
-            <a href="shop.php" class="option-btn">Seguir comprando</a>
-            <a href="checkout.php" class="btn  <?php echo ($total > 1) ? '' : 'disabled' ?>">Realizar pedido</a>
+            <a href="shop" class="option-btn">Seguir comprando</a>
+            <a href="checkout" class="btn  <?php echo ($total > 1) ? '' : 'disabled' ?>">Realizar pedido</a>
         </div>
 
     </section>

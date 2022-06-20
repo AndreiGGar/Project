@@ -13,6 +13,6 @@ if (isset($_COOKIE['admin'])) {
    setcookie('admin', $admin, time() - 3600);
 }
 
-header('location:index.php');
+header('location:index');
 
 ?>

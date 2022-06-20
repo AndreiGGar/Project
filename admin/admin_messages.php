@@ -9,13 +9,13 @@ if (isset($_COOKIE["admin"])) {
 }
 
 if (!isset($admin)) {
-   header('location: ../login.php');
+   header('location: ../login');
 };
 
 if (isset($_GET['delete'])) {
    $delete_id = $_GET['delete'];
    mysqli_query($conn, "DELETE FROM `messages` WHERE id = '$delete_id'") or die('query failed');
-   header('location: admin_messages.php');
+   header('location: admin_messages');
 }
 
 ?>
@@ -66,7 +66,7 @@ if (isset($_GET['delete'])) {
                   <p>Número: <span><?php echo $fetch_message['number']; ?></span> </p>
                   <p>Email: <span><?php echo $fetch_message['email']; ?></span> </p>
                   <p>Mensaje: <span><?php echo $fetch_message['description']; ?></span> </p>
-                  <a href="admin_messages.php?delete=<?php echo $fetch_message['id']; ?>" onclick="return confirm('¿Borrar este mensaje?');" class="delete-btn">Borrar</a>
+                  <a href="admin_messages?delete=<?php echo $fetch_message['id']; ?>" onclick="return confirm('¿Borrar este mensaje?');" class="delete-btn">Borrar</a>
                </div>
          <?php
             }

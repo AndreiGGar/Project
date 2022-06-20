@@ -9,7 +9,7 @@ if (isset($_COOKIE["admin"])) {
 }
 
 if (!isset($admin)) {
-   header('location: ../login.php');
+   header('location: ../login');
 };
 
 ?>
@@ -127,6 +127,15 @@ if (!isset($admin)) {
             ?>
             <h3><?php echo $number_of_account; ?> / <?php echo $number_of_account_total; ?></h3>
             <p>Cuentas no verificadas</p>
+         </div>
+
+         <div class="box">
+            <?php
+            $select_newsletter = mysqli_query($conn, "SELECT * FROM `newsletter`") or die('query failed');
+            $number_of_accounts = mysqli_num_rows($select_newsletter);
+            ?>
+            <h3><?php echo $number_of_accounts; ?></h3>
+            <p>Cuentas newsletter</p>
          </div>
 
          <div class="box">

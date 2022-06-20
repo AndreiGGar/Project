@@ -514,10 +514,11 @@ section {
    padding: 2em;
 }
 
-.home .content h3 {
+.home .content h1 {
    text-transform: uppercase;
    color: var(--black);
-   font-size: 5.5rem;
+   font-size: 5rem;
+   font-weight: 500;
 }
 
 .home .content p {
@@ -525,7 +526,7 @@ section {
    margin: 1rem 2rem 2rem;
    line-height: 2;
    font-size: 2rem;
-   font-weight: 700;
+   font-weight: 600;
    color: var(--dark-blue);
 }
 
