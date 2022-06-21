@@ -67,7 +67,7 @@ if (isset($_POST['add_to_cart']) && !isset($_COOKIE['admin'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">

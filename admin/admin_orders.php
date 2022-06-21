@@ -92,7 +92,7 @@ if (isset($_GET['delete'])) {
                         <option value="completado" <?php echo $disabled; ?>>completado</option>
                         <option value="cancelado" <?php echo $disabled; ?>>cancelado</option>
                      </select>
-                     <input type="submit" name="update_order" value="update" class="option-btn">
+                     <input type="submit" name="update_order" value="Actualizar" class="option-btn">
                      <a href="admin_orders?delete=<?php echo $fetch_orders['id']; ?>" class="delete-btn" onclick="return confirm('¿Borrar este pedido?');">Borrar</a>
                   </form>
                </div>

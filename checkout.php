@@ -41,6 +41,7 @@ if (isset($_POST['order'])) {
         mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
         $_SESSION['status'] = "Pedido realizado correctamente.";
         $_SESSION['status_msg'] = "success";
+        header('location:orders');
     }
 }
 

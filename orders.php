@@ -75,7 +75,7 @@ $user = $row['email'];
         <p> Precio total: <span><?php echo number_format($fetch_orders['total_price'], 2, ',', '.'); ?>€</span> </p>
         <p> Estado de pago: <span style="color:<?php if($fetch_orders['payment_status'] == 'pendiente'){echo 'tomato'; } else {echo 'green';} ?>"><?php echo $fetch_orders['payment_status']; ?></span> </p>
         <input type="hidden" value="<?php echo $fetch_orders['id']; ?>" name="order_id">
-		<button class="btn btn-success">Export</button>
+		<button class="btn btn-success">Exportar</button>
         </form>
     </div>
     <?php

@@ -26,7 +26,7 @@ if (isset($_POST["signup"])) {
       $_SESSION['status'] = "El email ya está registrado.";
       $_SESSION['status_msg'] = "error";
    } else {
-      $sql = "INSERT INTO users (`name`, `email`, `password`, `token`, `user_type`, `status`, `date-add`) VALUES ('$full_name', '$email', '$password', '$token', '2', '0', now())";
+      $sql = "INSERT INTO users (`name`, `email`, `password`, `token`, `user_type`, `status`, `date_add`) VALUES ('$full_name', '$email', '$password', '$token', '2', '0', now())";
       $result = mysqli_query($conn, $sql);
       if ($result) {
          $_POST["signup_full_name"] = "";

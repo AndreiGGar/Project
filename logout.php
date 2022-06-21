@@ -13,6 +13,15 @@ if (isset($_COOKIE['admin'])) {
    setcookie('admin', $admin, time() - 3600);
 }
 
-header('location:index');
+session_start();
 
+$_SESSION['status'] = "Has cerrado sesión.";
+$_SESSION['status_msg'] = "success";
+header('location:index');
+exit;
+
+?>
+
+<?php
+@include 'scripts/sweetalert.php';
 ?>
